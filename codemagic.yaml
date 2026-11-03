@@ -1,21 +1,35 @@
 
+workflows:
+  android-debug:
+    name: My Daily Hisab Debug APK
+    max_build_duration: 60
+    instance_type: mac_mini_m2
+
+    environment:
+      java: 17
+
     scripts:
-      - name: Inspect Android Folder
+      - name: Check Project Files
         script: |
-          echo "Checking Android folder..."
-          ls -la android
-          find android -maxdepth 3 -type f \( -name "gradlew" -o -name "build.gradle" -o -name "build.gradle.kts" -o -name "settings.gradle" -o -name "settings.gradle.kts" \)
+          echo "Checking project..."
+          pwd
+          ls -la
+          test -f gradlew
+          test -f settings.gradle.kts
+          echo "Project files verified."
+
+      - name: Check Gradle Modules
+        script: |
+          chmod +x ./gradlew
+          ./gradlew --no-daemon projects
 
       - name: Build Debug APK
         script: |
-          if [ -f android/gradlew ]; then
-            cd android
-            chmod +x gradlew
-            ./gradlew --no-daemon assembleDebug
-          else
-            echo "Android Gradle wrapper not found inside android folder."
-            exit 1
-          fi
+          ./gradlew --no-daemon assembleDebug
+
+      - name: Find APK
+        script: |
+          find . -type f -name "*.apk" -print
 
     artifacts:
-      - android/app/build/outputs/apk/debug/*.apk
+      - "**/build/outputs/apk/**/*.apk"
