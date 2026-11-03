@@ -1,0 +1,6 @@
+{
+  "name": "My Daily Hisab",
+  "description": "Premium minimal luxury Android finance app built with Jetpack Compose and Room for tracking daily income, expenses, and savings with English and Bengali support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

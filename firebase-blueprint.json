@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile information and settings",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "displayName": { "type": "string" },
+        "email": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "phone": { "type": "string" },
+        "bio": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "Financial income, expense, or savings record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "amount": { "type": "number" },
+        "type": { "type": "string", "enum": ["INCOME", "EXPENSE", "SAVINGS"] },
+        "categoryId": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "note": { "type": "string" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "userId", "amount", "type", "categoryId", "date"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Custom or default category for financial transactions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "nameEn": { "type": "string" },
+        "nameBn": { "type": "string" },
+        "type": { "type": "string", "enum": ["INCOME", "EXPENSE", "SAVINGS"] },
+        "icon": { "type": "string" },
+        "colorHex": { "type": "string" },
+        "isDefault": { "type": "boolean" }
+      },
+      "required": ["id", "nameEn", "nameBn", "type", "icon", "colorHex"]
+    },
+    "Settings": {
+      "title": "Settings",
+      "description": "User preferences and settings",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "language": { "type": "string" },
+        "currency": { "type": "string" },
+        "currencySymbol": { "type": "string" },
+        "useBengaliNumerals": { "type": "boolean" },
+        "monthlyBudget": { "type": "number" },
+        "themeMode": { "type": "string" }
+      },
+      "required": ["userId", "language"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Profile document for each authenticated user"
+    },
+    "/users/{userId}/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "User's financial transactions"
+    },
+    "/users/{userId}/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "User's custom and default categories"
+    },
+    "/users/{userId}/settings/{settingId}": {
+      "schema": "Settings",
+      "description": "User's app settings and configurations"
+    }
+  }
+}
