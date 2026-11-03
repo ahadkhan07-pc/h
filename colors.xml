@@ -1,0 +1,9 @@
+<resources>
+    <color name="luxury_black">#08060B</color>
+    <color name="luxury_surface">#120D1B</color>
+    <color name="accent_magenta">#D946EF</color>
+    <color name="accent_purple">#8B5CF6</color>
+    <color name="accent_velvet">#7C3AED</color>
+    <color name="accent_orange">#F97316</color>
+    <color name="accent_deep_orange">#EA580C</color>
+</resources>

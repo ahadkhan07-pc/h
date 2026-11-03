@@ -1,0 +1,11 @@
+<resources>
+    <style name="Theme.MyDailyHisab" parent="android:Theme.Material.NoActionBar">
+        <item name="android:statusBarColor">@color/luxury_black</item>
+        <item name="android:navigationBarColor">@color/luxury_black</item>
+    </style>
+    <style name="Theme.MyDailyHisab.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/luxury_black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.MyDailyHisab</item>
+    </style>
+</resources>
