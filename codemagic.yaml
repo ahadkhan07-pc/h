@@ -1,3 +1,4 @@
+
 workflows:
   android-debug:
     name: My Daily Hisab Debug APK
@@ -10,9 +11,11 @@ workflows:
     scripts:
       - name: Check Android Project
         script: |
+          echo "Checking Android project..."
           ls -la
           test -f gradlew
           test -d app
+          echo "Android project files found."
 
       - name: Build Debug APK
         script: |
@@ -21,3 +24,7 @@ workflows:
 
     artifacts:
       - app/build/outputs/apk/debug/*.apk
+
+    publishing:
+      email:
+        recipients: []
