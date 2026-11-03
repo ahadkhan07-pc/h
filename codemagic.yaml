@@ -3,7 +3,7 @@ workflows:
   android-debug:
     name: My Daily Hisab Debug APK
     max_build_duration: 60
-    instance_type: linux
+    instance_type: mac_mini_m2
 
     environment:
       java: 17
@@ -11,11 +11,10 @@ workflows:
     scripts:
       - name: Check Android Project
         script: |
-          echo "Checking Android project..."
+          echo "Checking project files..."
           ls -la
           test -f gradlew
           test -d app
-          echo "Android project files found."
 
       - name: Build Debug APK
         script: |
