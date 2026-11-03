@@ -9,27 +9,31 @@ workflows:
       java: 17
 
     scripts:
-      - name: Check Project Files
+      - name: Fix Gradle Wrapper
         script: |
-          echo "Checking project..."
-          pwd
-          ls -la
-          test -f gradlew
-          test -f settings.gradle.kts
-          echo "Project files verified."
+          set -e
+          mkdir -p gradle/wrapper
 
-      - name: Check Gradle Modules
+          if [ -f gradle-wrapper.jar ]; then
+            cp gradle-wrapper.jar gradle/wrapper/gradle-wrapper.jar
+          fi
+
+          if [ -f gradle-wrapper.properties ]; then
+            cp gradle-wrapper.properties gradle/wrapper/gradle-wrapper.properties
+          fi
+
+          echo "Checking Gradle wrapper..."
+          ls -la gradle/wrapper/
+          ls -la gradlew
+
+      - name: Check Gradle
         script: |
           chmod +x ./gradlew
-          ./gradlew --no-daemon projects
+          ./gradlew --no-daemon --version
 
       - name: Build Debug APK
         script: |
           ./gradlew --no-daemon assembleDebug
-
-      - name: Find APK
-        script: |
-          find . -type f -name "*.apk" -print
 
     artifacts:
       - "**/build/outputs/apk/**/*.apk"
